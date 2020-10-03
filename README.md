@@ -1,24 +1,21 @@
-# demo
+# 1.start web 
 
-## Project setup
+## enter into root ,press
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
+# 2.start server 
+## enter into root\server ,press
 ```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
+npm i koa koa-router jsonwebtoken koa-jwt
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## then press
+```
+node server 
+```
