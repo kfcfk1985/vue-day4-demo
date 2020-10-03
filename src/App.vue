@@ -1,13 +1,40 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <div>
+        <router-link to="/">Home</router-link> |
+        <router-link to="/about">About</router-link>
+      </div>
+
+      <div>
+        <button @click="checkUserInfo" >检测登陆状态</button>
+
+        <button @click="logOut" v-if="getIsLogin">登出</button>
+      </div>
     </div>
+
     <router-view />
   </div>
 </template>
 
+
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+  methods: {
+    checkUserInfo() {
+      this.$services.user.getInfo();
+    },
+    logOut() {
+      this.$store.dispatch("logout")
+    },
+  },
+  computed: {
+    ...mapGetters(["getIsLogin"]),
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

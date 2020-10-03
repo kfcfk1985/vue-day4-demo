@@ -23,8 +23,8 @@ export default {
   data() {
     return {
       model: {
-        username: "",
-        passwd: "",
+        username: "kaikeba",
+        passwd: "123",
       },
       schema: {
         // 表单结构定义
@@ -69,16 +69,26 @@ export default {
   },
   methods: {
     handleLogin(e) {
-      console.log("handleLogin", e);
+      // console.log("handleLogin", e);
 
-      e.preventDefault();    // 阻止表单默认提交行为（跳转或刷新）,why？答：详见：https://blog.csdn.net/fairyier/article/details/80048341
+      e.preventDefault(); // 阻止表单默认提交行为（跳转或刷新）,why？答：详见：https://blog.csdn.net/fairyier/article/details/80048341
 
-
-      this.$store.dispatch("login",this.model)
-      
+      this.$store
+        .dispatch("login", this.model)    //发送到 vuex 中，向服务器登陆
+        .then((ret) => {
+          // console.log("handleLogin success:", ret);
+          if (ret.code == 1) {            //登陆成功
+            let path = this.$route.query.redirect || '/';
+            this.$router.push({path });  //回跳之前的路径
+          }
+        })
+        .catch((err) => {
+          // console.log("handleLogin fail:", err);
+          alert(err);
+        });
     },
     haneldValidate(ret) {
-      console.log("haneldValidate", ret);
+      // console.log("haneldValidate", ret);
     },
   },
   beforeRouteEnter(to, from, next) {
