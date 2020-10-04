@@ -1,10 +1,15 @@
 <template>
   <div id="app">
     <transition name="page-switch">
-      <router-view class="view-container"></router-view>
+      <router-view class="view-container" :style="viewStyle"></router-view>
     </transition>
 
-    <cube-tab-bar v-model="selectLabel" :data="tabs" @change="changeHandler">
+    <cube-tab-bar
+      ref="tabBar"
+      v-model="selectLabel"
+      :data="tabs"
+      @change="changeHandler"
+    >
     </cube-tab-bar>
   </div>
 </template>
@@ -16,7 +21,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-     
+      viewStyle:null,
       selectLabel: "/",
       tabs: [
         {
@@ -39,7 +44,7 @@ export default {
   },
   methods: {
     changeHandler(val) {
-      console.log("你点击了tab,将要去", val);
+      // console.log("你点击了tab,将要去", val);
 
       this.$router.push({ path: val }).catch((err) => {
         // Reflect.ownKeys(err).forEach(key=>{
@@ -48,15 +53,27 @@ export default {
         // console.log("key",JSON.stringify(err,null,2))
 
         let regexp = /Redirected when going from/;
-        if (regexp.test(err) == true) {		//发生重定向引起的报错
+        if (regexp.test(err) == true) {	//发生重定向引起的报错
           
         } else {
           alert(`路由跳转发生其他错误:${err.message}`);
         }
       });
     },
+    getViewStyle() {
+      let tapBarHeight = tapBarHeight = this.$refs.tabBar.$el.offsetHeight;
+      return{
+        bottom: `${tapBarHeight}px`,
+      };
+    },
   },
-  computed: {},
+  computed: {
+    
+  },
+
+  mounted() {
+    this.viewStyle = this.getViewStyle();
+  },
 };
 </script>
 <style lang="stylus" scoped>
@@ -76,33 +93,30 @@ export default {
   background: #edf0f4;
 }
 
-
-//  **********  页面切换动效 start  ********** 
+// **********  页面切换动效 start  **********
 .page-switch-enter {
-  transform :translateX(-100%)
-  opacity :0
+  transform: translateX(-100%);
+  opacity: 0;
 }
-
 
 .page-switch-leave-to {
-    transform :translateX(100%)
-    opacity :0
+  transform: translateX(100%);
+  opacity: 0;
 }
 
-.page-switch-enter-active ,.page-switch-leave-active {
-  transition:all 0.5s linear;
-}
-// ********** 页面切换动效 end ********** 
-
-
-//解决增加页面切换动效后，页面上下摆动，出现水平，垂直滚动条的bug
-.view-container{
-   border: 1px solid green;
-   position:fixed;
-   top :0px;
-   right :0px;
-   left :0px
-   bottom :0px
+.page-switch-enter-active, .page-switch-leave-active {
+  transition: all 0.5s ease-in-out;
 }
 
+// ********** 页面切换动效 end **********
+
+// ********** 解决增加页面切换动效后，页面上下摆动，出现水平，垂直滚动条的bug
+.view-container {
+  // border: 1px solid green;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+}
 </style>

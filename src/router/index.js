@@ -22,7 +22,7 @@ const routes = [{
     name: 'Login',
     component: Login,
     beforeEnter: (to, from, next) => {
-      console.log("this is: before Enter")
+      // console.log("this is: before Enter")
 
       next();
     }
@@ -70,13 +70,13 @@ router.beforeEach((to, from, next) => {
   next();
 })
 router.beforeResolve((to, from, next) => {
-  console.log("this is: before Resolve")
+  // console.log("this is: before Resolve")
 
   next();
 })
 
 router.afterEach((to, from) => {
-  console.log("this is: after Each")
+  // console.log("this is: after Each")
 })
 
 export default router
