@@ -1,6 +1,8 @@
+import axios from 'axios'
+
 import log from './log.js'
 import user from './user'
-import axios from 'axios'
+import goods from './goods'
 
 function init(vm) {
     // 添加请求拦截器
@@ -41,7 +43,9 @@ function init(vm) {
 }
 
 export default {
+    init,
+
     log,
     user,
-    init
+    goods
 }

@@ -9,5 +9,8 @@ module.exports = {
 
     USER:{
         GET_INFO:"/api/user/getInfo"
+    },
+    GOODS:{
+        GET:"/api/goods/get"
     }
 }
