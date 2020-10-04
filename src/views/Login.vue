@@ -74,7 +74,7 @@ export default {
       e.preventDefault(); // 阻止表单默认提交行为（跳转或刷新）,why？答：详见：https://blog.csdn.net/fairyier/article/details/80048341
 
       this.$store
-        .dispatch("login", this.model)    //发送到 vuex 中，向服务器登陆
+        .dispatch("login/login", this.model)    //发送到 vuex 中，向服务器登陆
         .then((ret) => {
           // console.log("handleLogin success:", ret);
           if (ret.code == 1) {            //登陆成功

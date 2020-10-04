@@ -25,7 +25,7 @@ function init(vm) {
     axios.interceptors.response.use(null, function (error) {
         //返回的 error 对象中带有 response，这个很难看出来啊
         if(error.response.status == 401){
-            vm.$store.dispatch("logout")
+            vm.$store.dispatch("login/logout")
             // console.log('vm.$router.currentRoute',vm.$router.currentRoute)
             if(vm.$router.currentRoute.name != 'Login'){    //当前页面不为 Login才跳转
                 vm.$router.push({

@@ -6,6 +6,7 @@ import services from '../services/index' //发现用这样路径引入，IDE 可
 
 
 export default {
+  namespaced: true,
   state: {
     isLogin: localStorage.getItem("token") ? true : false
   },
