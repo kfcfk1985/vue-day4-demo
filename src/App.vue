@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view />
+    <transition name="page-switch">
+      <router-view class="view-container"></router-view>
+    </transition>
 
     <cube-tab-bar v-model="selectLabel" :data="tabs" @change="changeHandler">
     </cube-tab-bar>
@@ -14,6 +16,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+     
       selectLabel: "/",
       tabs: [
         {
@@ -38,22 +41,19 @@ export default {
     changeHandler(val) {
       console.log("你点击了tab,将要去", val);
 
-
       this.$router.push({ path: val }).catch((err) => {
-        
         // Reflect.ownKeys(err).forEach(key=>{
         //   console.log("key",key)
         // })
         // console.log("key",JSON.stringify(err,null,2))
-       
 
         let regexp = /Redirected when going from/;
-        if(regexp.test(err) == true){   //发生重定向引起的报错
-
-        }else{
-          alert(`路由跳转发生其他错误:${err.message}`)
+        if (regexp.test(err) == true) {		//发生重定向引起的报错
+          
+        } else {
+          alert(`路由跳转发生其他错误:${err.message}`);
         }
-      }); 
+      });
     },
   },
   computed: {},
@@ -68,20 +68,6 @@ export default {
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-  border: 1px solid red;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
 .cube-tab-bar {
   position: fixed;
   bottom: 0;
@@ -89,4 +75,34 @@ export default {
   right: 0;
   background: #edf0f4;
 }
+
+
+//  **********  页面切换动效 start  ********** 
+.page-switch-enter {
+  transform :translateX(-100%)
+  opacity :0
+}
+
+
+.page-switch-leave-to {
+    transform :translateX(100%)
+    opacity :0
+}
+
+.page-switch-enter-active ,.page-switch-leave-active {
+  transition:all 0.5s linear;
+}
+// ********** 页面切换动效 end ********** 
+
+
+//解决增加页面切换动效后，页面上下摆动，出现水平，垂直滚动条的bug
+.view-container{
+   border: 1px solid green;
+   position:fixed;
+   top :0px;
+   right :0px;
+   left :0px
+   bottom :0px
+}
+
 </style>
