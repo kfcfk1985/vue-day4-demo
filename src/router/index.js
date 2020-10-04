@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-
+import Cart from '../views/Cart.vue'
 
 
 Vue.use(VueRouter)
@@ -11,6 +11,11 @@ const routes = [{
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/Cart',
+    name: 'Cart',
+    component: Cart
   },
   {
     path: '/login',
@@ -30,9 +35,9 @@ const routes = [{
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import( /* webpackChunkName: "about" */ '../views/About.vue'),
-    meta: { 
-      requiresAuth: true    //控制是否需要登录信息
-    }    
+    meta: {
+      requiresAuth: true //控制是否需要登录信息
+    }
   }
 ]
 
@@ -43,16 +48,22 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log("this is: before Each")
+  console.log("\n\rthis is: before Each")
   let token;
-  if(to.meta && to.meta.requiresAuth == true){      // 需要登录
+  if (to.meta && to.meta.requiresAuth == true) { // 需要登录
     token = localStorage.getItem("token");
-    if(!token){
+    if (!token) {
+      console.log("没有登陆，重定向到login")
+
+
       next({
-        name:'Login',                 //没有登陆，重定向到login页面
-        query:{redirect:to.path}      //带上本来要跳转的参数       
+        name: 'Login', //没有登陆，重定向到login页面
+        query: {
+          redirect: to.path
+        } //带上本来要跳转的参数       
       })
-    }else{
+
+    } else {
       next();
     }
   }
