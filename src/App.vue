@@ -1,12 +1,20 @@
 <template>
   <div id="app">
+
+    <k-header ref="header" 
+              :title="$route.meta.title" 
+              :showback="$routerHistory.canBack()"
+              @back="goBack">
+      <i class="cubeic-tag"></i>
+    </k-header>
+
     <transition name="page-switch">
       <router-view class="view-container" :style="viewStyle"></router-view>
     </transition>
 
     <cube-tab-bar
       ref="tabBar"
-      v-model="selectLabel"
+      v-model="$store.state.tabSelect"
       :data="tabs"
       @change="changeHandler"
     >
@@ -16,13 +24,14 @@
 
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters,mapState } from "vuex";
+import KHeader from "@/components/Header.vue";
+
 
 export default {
   data() {
     return {
       viewStyle:null,
-      selectLabel: "/",
       tabs: [
         {
           label: "Home",
@@ -41,6 +50,9 @@ export default {
         },
       ],
     };
+  },
+  components:{
+    KHeader,
   },
   methods: {
     changeHandler(val) {
@@ -61,14 +73,23 @@ export default {
       });
     },
     getViewStyle() {
-      let tapBarHeight = tapBarHeight = this.$refs.tabBar.$el.offsetHeight;
+      let tapBarHeight = this.$refs.tabBar.$el.offsetHeight;
+      let headerHeight = this.$refs.header.$el.offsetHeight;
+
+      
       return{
+        top: `${headerHeight}px`,
         bottom: `${tapBarHeight}px`,
       };
     },
+    goBack(){
+      this.$router.goBack();
+    }
   },
   computed: {
-    
+    ...mapState({
+      
+    })
   },
 
   mounted() {
