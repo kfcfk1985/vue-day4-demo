@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+   
 
+    
     <k-header ref="header" 
               :title="$route.meta.title" 
               :showback="$routerHistory.canBack()"
@@ -13,11 +15,11 @@
     </transition>
 
     <cube-tab-bar
-      ref="tabBar"
-      v-model="$store.state.tabSelect"
-      :data="tabs"
-      @change="changeHandler"
-    >
+          ref="tabBar"
+          v-model="$store.state.tabSelect"
+          :data="tabs"
+          @change="changeHandler"
+        >
     </cube-tab-bar>
   </div>
 </template>

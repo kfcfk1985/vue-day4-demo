@@ -13,6 +13,8 @@
     <div class="good-list-container" :style="getGoodListStyle" >
       <good-list :data="goods" @cartanim="startCartAnim"></good-list>
     </div>
+
+    <cart-anim ref="ca"></cart-anim>
   </div>
 </template>
 
@@ -22,12 +24,13 @@
 
 import { mapState,mapActions,mapGetters } from "vuex";
 import GoodList from "@/components/GoodList.vue";
-
+import CartAnim from "@/components/CartAnim.vue";
 
 export default {
   name: 'Home',
   components: {
-    GoodList
+    GoodList,
+    CartAnim
   },
   computed: {
     ...mapState('goods',{
@@ -46,6 +49,9 @@ export default {
   methods: {
       ...mapActions('goods',["get"]),
       startCartAnim(el) {
+
+        this.$refs.ca.start(el)
+
       // 创建小球动画实例，开始动画
       // const anim = this.$createCartAnim({
       //   onTransitionend(){
