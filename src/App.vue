@@ -75,8 +75,8 @@ export default {
     getViewStyle() {
       let tapBarHeight = this.$refs.tabBar.$el.offsetHeight;
       let headerHeight = this.$refs.header.$el.offsetHeight;
-
-      
+      let appHeight = document.getElementById("app").clientHeight
+      this.$store.state.viewHeight = appHeight - tapBarHeight - headerHeight;
       return{
         top: `${headerHeight}px`,
         bottom: `${tapBarHeight}px`,
@@ -104,6 +104,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
 }
 
 .cube-tab-bar {

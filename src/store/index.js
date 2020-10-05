@@ -14,6 +14,7 @@ export default new Vuex.Store({
   },
   state:{
     tabSelect: "/",   //选中的 tab 
+    viewHeight:667,
   },
   actions:{
     setTabSelect({commit},{path}){
