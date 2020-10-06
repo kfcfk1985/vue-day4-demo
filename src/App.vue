@@ -20,6 +20,11 @@
           :data="tabs"
           @change="changeHandler"
         >
+      <cube-tab v-for="(item, index) in tabs" 
+                :icon="item.icon" :label="item.value" :key="index">
+        <div>{{item.label}}</div>
+        <span class="badge" v-if="item.label=='Cart'">{{cartTotal}}</span>
+      </cube-tab>
     </cube-tab-bar>
   </div>
 </template>
@@ -89,9 +94,7 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      
-    })
+    ...mapGetters('cart',["cartTotal"])
   },
 
   mounted() {
@@ -147,5 +150,22 @@ export default {
   right: 0px;
   left: 0px;
   bottom: 0px;
+}
+
+
+.cube-tab {
+  position: relative;
+}
+
+span.badge {
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px;
+  min-width: 16px;
+  min-height: 16px;
+  position: absolute;
+  right: 25%;
+  top: 0;
 }
 </style>
