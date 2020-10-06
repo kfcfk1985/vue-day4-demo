@@ -22,7 +22,7 @@ export default {
   props: ["data"],
   methods: {
     addCart(event, item) {
-      this.$store.commit("addcart", item);
+      this.$store.commit("cart/addcart", item);
       this.$emit('cartanim', event.target)
     },
     imgPreview(img) {

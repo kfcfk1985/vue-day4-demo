@@ -3,14 +3,15 @@ import Vuex from 'vuex'
 
 import login from './login.js'
 import goods from './goods.js'
-
+import cart from './cart.js'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules:{
     login,
-    goods
+    goods,
+    cart
   },
   state:{
     tabSelect: "/",   //选中的 tab 

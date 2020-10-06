@@ -24,7 +24,9 @@
 
 import { mapState,mapActions,mapGetters } from "vuex";
 import GoodList from "@/components/GoodList.vue";
-// import CartAnim from "@/components/CartAnim.vue";
+import CartAnim from "@/components/CartAnim.vue";
+
+
 
 
 
