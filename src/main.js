@@ -4,7 +4,12 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 
-import services from './services/index' //发现用这样路径引入，IDE 可以很好地补全代码。用 '@/services/index.js'的方式就不行
+import services from './services/index'     //发现用这样路径引入，IDE 可以很好地补全代码。用 '@/services/index.js'的方式就不行
+
+import {createAPI} from 'cube-ui'
+import CartAnim from '@/components/CartAnim.vue'
+createAPI(Vue,CartAnim,['transitionend'])   // 给vue注册实例方法，方法名$createCartAnim
+
 
 
 Vue.config.productionTip = false

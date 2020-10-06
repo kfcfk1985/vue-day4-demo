@@ -14,7 +14,7 @@
       <good-list :data="goods" @cartanim="startCartAnim"></good-list>
     </div>
 
-    <cart-anim ref="ca"></cart-anim>
+    <!-- <cart-anim ref="ca"></cart-anim> -->
   </div>
 </template>
 
@@ -24,13 +24,13 @@
 
 import { mapState,mapActions,mapGetters } from "vuex";
 import GoodList from "@/components/GoodList.vue";
-import CartAnim from "@/components/CartAnim.vue";
+// import CartAnim from "@/components/CartAnim.vue";
 
 export default {
   name: 'Home',
   components: {
     GoodList,
-    CartAnim
+    // CartAnim
   },
   computed: {
     ...mapState('goods',{
@@ -50,15 +50,13 @@ export default {
       ...mapActions('goods',["get"]),
       startCartAnim(el) {
 
-        this.$refs.ca.start(el)
-
-      // 创建小球动画实例，开始动画
-      // const anim = this.$createCartAnim({
-      //   onTransitionend(){
-      //     anim.remove();
-      //   }
-      // });
-      // anim.start(el)
+        // this.$refs.ca.start(el)
+        const anim = this.$createCartAnim({   // 创建小球动画实例，开始动画
+          onTransitionend(){
+            anim.remove();
+          }
+        });
+        anim.start(el)
 
       // 方式2
       // const anim = this.$create(CartAnim, {
