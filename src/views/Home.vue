@@ -26,6 +26,8 @@ import { mapState,mapActions,mapGetters } from "vuex";
 import GoodList from "@/components/GoodList.vue";
 // import CartAnim from "@/components/CartAnim.vue";
 
+
+
 export default {
   name: 'Home',
   components: {
@@ -51,19 +53,20 @@ export default {
       startCartAnim(el) {
 
         // this.$refs.ca.start(el)
-        const anim = this.$createCartAnim({   // 创建小球动画实例，开始动画
-          onTransitionend(){
-            anim.remove();
-          }
-        });
-        anim.start(el)
+        // const anim = this.$createCartAnim({   // 创建小球动画实例，开始动画
+        //   onTransitionend(){
+        //     anim.remove();
+        //   }
+        // });
+        // anim.start(el)
+
 
       // 方式2
-      // const anim = this.$create(CartAnim, {
-      //   pos: { left: "45%", bottom: "16px" }
-      // });
-      // anim.start(el);
-      // anim.$on("transitionend", anim.remove);
+      const anim = this.$create(CartAnim, {
+        pos: { left: "45%", bottom: "16px" }
+      });
+      anim.start(el);
+      anim.$on("transitionend", anim.remove);
     },
   
   },
